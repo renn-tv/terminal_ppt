@@ -85,6 +85,6 @@ Place your deck as `1h_Intro_to_LLMs.md` next to `app.py` (or adjust the path in
 ## Project Layout
 
 ```
-app.py                   # Textual application
+Python_Terminal_PPT.py   # Textual application
 1h_Intro_to_LLMs.md      # Source Markdown deck
 ```
