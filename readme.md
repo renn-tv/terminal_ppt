@@ -1,90 +1,102 @@
 # Terminal PPT
 
-Terminal-based slide presenter built with Textual/Rich. Write your talk in Markdown; present with large FIGlet headings and high-contrast terminal visuals. Keyboard-only, fast, and robust.
+A lightweight, zero-dependency presentation tool that runs directly in your terminal. It renders presentations from a simple Markdown file, allowing you to focus on content while providing a clean, retro-style presentation experience.
+
+![Demo Screenshot](https://dentro.de/ai/images/terminal_ppt.png)
 
 ## Features
 
-* **Markdown → slides**
+-   **Zero Dependencies**: Runs using only Python's standard library. No `pip install` required.
+-   **Markdown-Driven**: Slides, headings, and bullet points are generated directly from a `.md` file.
+-   **Cross-Platform**: Works on Windows, macOS, and Linux terminals.
+-   **Incremental Animation**: Reveal content step-by-step: first headers, then the body, and finally sentence-by-sentence highlighting.
+-   **Themable**: Easily customize the foreground and background colors with ANSI color codes.
+-   **Responsive Layout**: The display automatically adjusts to your terminal's width.
+-   **Instant Input**: Navigate your presentation with single key presses—no need to press `Enter`.
+-   **Live Updates**: Change and save the source markdown file and see the updates directly in the presentation.
+-   **Clock included**: On top of screen, needs reload for update.
+-   **Location / Breadcrump**: Always visible with highlighting of nested header structure, also shows progress to audience.
 
-  * Headings (`#`, `##`, …) form the slide path.
-  * Bullets, numbered items, and paragraphs become the body.
-  * Links render as **label only** (URLs hidden).
-  * Presenter comments are ignored: HTML (`<!-- -->`), Obsidian (`%% %%`), GFM (`[//]: # (...)`, `[note]: <> (...)`).
-* **Always-visible context**
+## Prerequisites
 
-  * Top line shows level-1 heading with a clock.
-  * Each deeper level shows all sibling headings; current sibling is inverted.
-* **Navigation model**
+-   Python 3.6 or higher.
 
-  * Depth-first order.
-  * Body appears one click after the deepest heading is revealed.
-  * Moving between siblings stays highlighted (no intermediate un-highlight).
-* **Manual reload**
+## Installation
 
-  * Press `r` to re-read the Markdown.
-  * Remains on the **same slide** and **keeps highlight phase**; body stays visible if it was.
-* **Rendering stability**
+No installation is needed. Simply clone the repository or download the Python script.
 
-  * No wrapping, cropped overflow, clipped during resize to avoid jitter.
-* **Theme & fonts**
+## Usage
 
-  * Two-color theme (default 256-safe): background `#00005f`, text `#87d7ff`.
-  * FIGlet font `future`; toggle FIGlet/plain at runtime.
+The application is designed to be simple to use. Just create your content in a Markdown file and run the script. Scale the terminal window and increase the terminal font size for presentation mode. You can keep source markdown and terminal open at same time for live updates.
 
-## Requirements
+### 1. Create Your Markdown File
 
-* Python 3.9+
-* Packages: `textual`, `rich`, `pyfiglet`
+Create a file named `1h_Intro_to_LLMs.md` in the same directory as the script. The script is hardcoded to look for this file, but you can change the filename.
 
-## Quick Start
+### 2. Add Your Content
 
-```bash
-python -m venv venv
-source venv/bin/activate         # Windows: venv\Scripts\activate
-pip install textual rich pyfiglet
-python app.py
-```
+The presentation structure is based on Markdown headings and lists.
 
-Place your deck as `1h_Intro_to_LLMs.md` next to `app.py` (or adjust the path in the code).
+-   `# Heading 1` creates a main slide topic.
+-   `## Heading 2` creates a sub-topic under the last `Heading 1`. The tool supports multiple levels of headings (`###`, `####`, etc.).
+-   `- A bullet point.` or `* A bullet point.` creates a text item on the current slide.
+-   Numbered lists (`1. First item`) are also supported.
+-   Presenter notes or comments can be added using standard HTML (`<!-- comment -->`) or Obsidian (`%% comment %%`) syntax and will be ignored.
 
-## Key Bindings
+**Example `1h_Intro_to_LLMs.md`:**
 
-| Key | Action                                      |
-| --- | ------------------------------------------- |
-| ↓   | Next (reveal deeper → next slide)           |
-| ↑   | Previous heading slide                      |
-| →   | Highlight next sentence in body             |
-| ←   | Highlight previous sentence in body         |
-| t   | Toggle FIGlet ↔ plain text                  |
-| r   | Reload Markdown (stay on slide, keep phase) |
-| q   | Quit                                        |
+    # LLM Intro and Howto
 
-## Authoring Notes
+    <!-- This is a presenter note and will not be displayed. -->
 
-* Headings create the navigation path; content under a heading appears on that slide.
-* Numbered bullets remain whole lines; paragraphs split on sentence boundaries for highlighting.
-* Comments that won’t render:
+    ## How They Are Created
+    - This is the first point about creation.
+    - This is the second. It can be a very long sentence, and the application will automatically wrap the text to fit the screen.
 
-  * `<!-- hidden -->`, `<!-- block ... -->`
-  * `%% hidden %%`, `%% block ... %%`
-  * `[//]: # (hidden)`, `[note]: <> (hidden)`
+    ## Technical Details
+    1. Detail one: Pre-training.
+    2. Detail two: Fine-tuning.
 
-## Configuration
+    ## How To Use
+    - By using APIs.
+    - Or by running local models.
 
-* Colors: edit `BG` and `FONT` constants at the top of `app.py`.
+    ## Questions?
+    - This is the final slide for questions.
 
-  * Defaults are 256-palette friendly; truecolor hex also works in capable terminals.
-* FIGlet font: change in `HeadingFig` / `BodyFig`.
-* Markdown file name: adjust `LessonApp._md_path()`.
+### 3. Run the Application
 
-## Notes on Colors
+Execute the Python script from your terminal:
 
-* Truecolor terminals render exact hex; others downsample to the nearest palette color.
-* Defaults (`#00005f` / `#87d7ff`) look consistent on 256-color terminals.
+    python terminal_ppt.py
 
-## Project Layout
+### 4. Navigate Your Presentation
 
-```
-Python_Terminal_PPT.py   # Textual application
-1h_Intro_to_LLMs.md      # Source Markdown deck
-```
+Use the following keys to navigate:
+
+| Key(s)               | Action                                     |
+| -------------------- | ------------------------------------------ |
+| `j` or `Enter`       | Advance to the next step (reveal or slide) |
+| `k`                  | Go to the previous slide (fully revealed)  |
+| `l`                  | Highlight the next sentence in the body    |
+| `h`                  | Highlight the previous sentence in the body|
+| `r`                  | Reload the content from the Markdown file  |
+| `q` or `Ctrl+C`      | Quit the application                       |
+
+## Customization
+
+You can easily change the color theme by editing the constants at the top of the script. The colors are defined using 256-color ANSI escape codes.
+
+    # ------------------------
+    # --- THEME CUSTOMIZATION ---
+    # ------------------------
+    # BG: #00005f (dark blue) -> 256-color code 17
+    # FG: #87d7ff (light blue) -> 256-color code 117
+    BG_COLOR = "\033[48;5;17m"
+    FG_COLOR = "\033[38;5;117m"
+    # Highlight colors are the inverse of the main theme
+    HIGHLIGHT_BG_COLOR = "\033[48;5;117m"
+    HIGHLIGHT_FG_COLOR = "\033[38;5;17m"
+    # ------------------------
+
+You can find a reference for 256-color codes [here](https://www.ditig.com/256-colors-cheat-sheet) to pick your own theme.

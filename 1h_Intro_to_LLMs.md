@@ -1,7 +1,7 @@
 # LLM Intro and HowTo
 * Goal: 
-* get a basic understanding of the LLM blackbox and use that knowledge for better utilizing AI tools.
-## How they are created
+* get a basic understanding of the LLM blackbox and use that knowledge for better interaction with AI tools.
+## How LLM is created
 ### Base Model
 1) Gather and prepare data  <!-- curated internet, de-duplication, Wikipedia, books, code, licenced data, domain coverage, .. Dataset quality is more important than quantity. Watch for safety risks and biases. -->
 2) Tokenization based on Vocabulary <!-- 50.000 - 150.000 entries -->  
@@ -36,26 +36,28 @@
   * [Transformer Explainer](https://poloclub.github.io/transformer-explainer/) <!-- Attention = finding words that matter in context -->
   * [Parameter Count](https://huggingface.co/xai-org/grok-2/discussions/24)
   #### Hosting
-    * Proprietary Models like OpenAI, Google, Anthropic
-    * Open Weights Models
+  * Proprietary Models like ChatGPT 5 (OpenAI), Gemini 2.5 Pro (Google), Claude Opus 4.1 (Anthropic)
+  * Open Weights Models like Gemma 3 (Google), gpt-oss (OpenAI)
+  * Open Source Models (also contain training data and training process)
 ## How to use
-### Where they are bad and why
+### Where LLM is bad and why
 * Counting 
 * Spelling
 * Detailed Knowledge
-### Where thy are good and why
+### Where LLM is good and why
 * Writing: styles, grammar / translation / summaries / re-phrasing / explaining
 * Coding, Programming
 * General knowledge in basically all domains
 * Brainstorming
 * Learning
 * Role Playing like expert or beginner
-### Best Practice
-* Spend time to develop a good prompt = context <!-- Prompt Engineering -->
+### Best Practice for LLM Interaction
+* Spend time to develop a good prompt (aka Prompt Engineering) = context <!-- Prompt Engineering -->
 * Use English - this is the language models see most during training
-* Keep log for important prompts
-* Create Assistant for repetitive prompts/work
-* Do not ask for analysis result, but develop code to calculate the result. more transparent / allows re-use / can be documented as company asset
+* Keep log for important prompts <!-- Our Ford LLM saves them too -->
+* Create Assistant for repetitive prompts/work <!-- only a little bit more effort than a prompt -->
+* Do not ask for analysis result, ask for code: transparent, re-use, company asset <!-- develop code to calculate the result. more transparent / allows re-use / can be documented as company asset --> 
+* Don't argue with LLM, but iterate <!-- What is the evidence for and against ... -->
 ### FAQ
 * Can models answer "who are you"?
 * Does your feedback train the models?
